@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #FFFFFF;">
+        <a class="navbar-brand" href="/">
+            <img src="https://external-preview.redd.it/G-mwWmubsE1axprtuCKxwrcNdvKhgYaIueOjNHrKwmc.png?auto=webp&s=fd5143500e8eb2579845d1ed89d4ab12a0ef7b57" width="30" height="30" alt="">Seddit
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="button" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </ul>
+            {% if not(logged) %}
+                <button class="log_in" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">Log In</button>
+                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="https://i.ibb.co/mCRx763/Screenshot-from-2022-08-01-23-19-53.png">
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row"></div>
+                                        <h5 style="font-family: 'Lucida Console', 'Courier New', monospace; padding-top: 50px; padding-left: 20px;">Log In</h5>
+                                        <p style="font-size: small; padding-left: 20px;">By continuing, you agree to our User Agreement and Privacy Policy.</p>
+                                        <p class="h2"><span class="h2-span">OR</span></p>
+                                        <form method="POST" action="/">
+                                            <div>
+                                                <div>
+                                                    <input class="log" type="email" placeholder="email" name="email-log" id="emailStr" required>
+                                                </div>
+                                            </div>
+
+                                            <!-- Password -->
+                                            <div>
+                                                <div class="input-group">
+                                                    <input class="log" type="password" placeholder="password"  name="password-log" minlength="6">
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Button -->
+                                            <div>
+                                                <input class="log-button" type="submit" name="log in" value="Log In"/>
+                                            </div>
+                                        </form>
+                                        <p style="padding-left: 20px;">New to Seddit? SIGN UP</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="sign_up" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">Sign Up</button>
+                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="https://i.ibb.co/mCRx763/Screenshot-from-2022-08-01-23-19-53.png">
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row"></div>
+                                        <h5 style="font-family: 'Lucida Console', 'Courier New', monospace; padding-top: 100px; padding-left: 20px;">Sign Up</h5>
+                                        <p style="font-size: small; padding-left: 20px;">By continuing, you are setting up a Seddit acount and agreei to our User Agreement and Privacy Policy.</p>
+                                        <p class="h2"><span class="h2-span">OR</span></p>
+                                        <form id = "form1" method="post" action="/">
+                                            <div>
+                                                <div class="input-group">
+                                                    <input class="log" type="email" placeholder="email" name="email-up" id="emailStr" required>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <input class="log" type="text" placeholder="username" name="username" id="emailStr" minlength="6" required>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="input-group">
+                                                    <input class="log" type="password" placeholder="password"  name="password" minlength="6">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <input type="submit" class="log-button" value="Sign Up"/>
+                                            </div>
+                                        </form>
+                                        <p style="padding-left: 20px;">Already a Sedditor? <a href="/" data-toggle="modal" data-target="#exampleModalCenter1">LOG IN</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 style="font-family: 'Lucida Console', 'Courier New', monospace; padding-top: 20px; padding-left: 20px;">Choose your username</h6><br>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="row"></div>
+                                        <p style="font-size: small; padding-left: 20px;">By continuing, you are setting up a Seddit acount and agreei to our User Agreement and Privacy Policy.</p>
+                                        <form class="sign_up-form" method="post" action="/">
+                                            <div>
+                                                <div>
+                                                    <input class="log" type="text" placeholder="username" name="username" id="emailStr" minlength="6" required>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="input-group">
+                                                    <input class="log" type="password" placeholder="password"  name="password" minlength="6">
+                                                </div>
+                                            </div>
+                                            <button class="log-button" data-toggle="modal" data-target="#exampleModalCenter2" type="submit"  name="sign up" value="sign up In">Sign Up</button>
+                                        </form>
+                                         
+                                        <div class="modal-footer">
+                                            <!-- <a href="" style="text-align: left;" data-dismiss="modal"><span>Back</span></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <form action="/" method="post">
+                    <input class="sign_up" type="submit" name="sign out" value="Sign Out"/>
+                </form>
+            {% endif %}
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="..." id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="https://i.pinimg.com/736x/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.jpg" style="max-height: 30px;">
+            </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                {% if logged %}
+                    <div class="row" style="background-color: white; margin-top: 20px;">
+                        <button class="button" onclick="location.href = '/submit';">New Post</button>
+                    </div>
+                {% endif %}
+                {% for key in keys %}
+                    <div class="row" style="background-color: white; margin-top: 20px;">
+                        <div class="col-1" style="background-color: none;">
+                            <form class="d-flex justify-content-center" action="/" method="post">
+                                <button class="vote" type="submit" name="upvote" value="{{key}}">&#8657</button>
+                            </form>
+                            <p class="d-flex justify-content-center" style="margin: 0px;">{{posts[key]["votes"]}}</p>
+                            <form class="d-flex justify-content-center" action="/" method="post">
+                                <button class="vote" type="submit" name="downvote" value="{{key}}">&#8659</button>
+                            </form>
+                        </div>
+                        <div class="col-11">
+                        <a href="posts/{{key}}">
+                            <a href="#">
+                            <img src="https://i.pinimg.com/736x/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.jpg" style="max-height: 20px;">
+                            <span>{{posts[key]["user"]["username"]}}</span>
+                            </a>
+                            <h3>{{posts[key]["title"]}}</h3>
+                            <a href="/log_in"><button type="button" class="tag">tag</button></a>
+                            <p>{{posts[key]["text"]}}</p>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="/log_in"><button type="button" class="btn btn-light"><img src="https://icon-library.com/images/comment-icon-png/comment-icon-png-2.jpg" style="max-height: 15px;">
+                                [num] comments</button></a>
+                                <a href="/log_in"><button type="button" class="btn btn-light">&#8625 share</button></a>
+                                <a href="/log_in"><button type="button" class="btn btn-light"><img src="https://icon-library.com/images/bookmark-icon-png/bookmark-icon-png-1.jpg" style="max-height: 15px;">
+                                add bookmark</button></a>
+                                <a href="/log_in"><button type="button" class="btn btn-light">&#9872 report</button></a>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+    
+</body>
+</html>
