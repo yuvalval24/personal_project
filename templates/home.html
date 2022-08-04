@@ -68,8 +68,8 @@
                         </div>
                     </div>
                 </div>
-                <button class="sign_up" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">Sign Up</button>
-                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                <button class="sign_up" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">Sign Up</button>
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="container-fluid">
@@ -184,7 +184,6 @@
                             </form>
                         </div>
                         <div class="col-11">
-                        <a href="posts/{{key}}">
                             <a href="#">
                             <img src="https://i.pinimg.com/736x/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.jpg" style="max-height: 20px;">
                             <span>{{posts[key]["user"]["username"]}}</span>
@@ -198,9 +197,8 @@
                                 <a href="/log_in"><button type="button" class="btn btn-light">&#8625 share</button></a>
                                 <a href="/log_in"><button type="button" class="btn btn-light"><img src="https://icon-library.com/images/bookmark-icon-png/bookmark-icon-png-1.jpg" style="max-height: 15px;">
                                 add bookmark</button></a>
-                                <a href="/log_in"><button type="button" class="btn btn-light">&#9872 report</button></a>
+                                <a href="/posts/{{key}}"><button type="button" class="btn btn-light">View Post</button></a>
                             </div>
-                        </a>
                         </div>
                     </div>
 

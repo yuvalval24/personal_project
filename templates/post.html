@@ -169,11 +169,11 @@
             <div class="col-6" style="background-color: white;">
                 <div class="row" style="background-color: white; margin-top: 20px;">
                         <div class="col-1" style="background-color: none;">
-                            <form class="d-flex justify-content-center" action="/" method="post">
+                            <form class="d-flex justify-content-center" action="/posts/{{Id}}" method="post">
                                 <button class="vote" type="submit" name="upvote" value="{{Id}}">&#8657</button>
                             </form>
                             <p class="d-flex justify-content-center" style="margin: 0px;">{{posts[Id]["votes"]}}</p>
-                            <form class="d-flex justify-content-center" action="/" method="post">
+                            <form class="d-flex justify-content-center" action="/posts/{{Id}}" method="post">
                                 <button class="vote" type="submit" name="downvote" value="{{Id}}">&#8659</button>
                             </form>
                         </div>

@@ -25,6 +25,36 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
 
+def vote_func():
+    try:
+        print(db.child('Users').get().val())
+        voted0 = list(db.child('Posts').child(request.form["upvote"]).child("upvoted").get().val())
+        print("voted0", voted0)
+        if login_session["user"]["localId"] in voted0:
+            print("voted")
+        else:
+            likes = db.child("Posts").child(request.form["upvote"]).child("votes").get().val()
+            db.child("Posts").child(request.form["upvote"]).update({"votes":likes+1})
+            user = login_session["user"]["localId"]
+            db.child('Posts').child(request.form["upvote"]).update({"upvoted":voted0+[user]})
+    except:
+        print("downvote")
+
+
+    try:
+        voted1 = list(db.child('Posts').child(request.form["downvote"]).get().val())
+        print(db.child("Users").get().val())
+        if login_session["user"]["localId"] in voted1:
+            print("voted")
+        else:
+            likes = db.child("Posts").child(request.form["downvote"]).child("votes").get().val()
+            print(likes)
+            db.child("Posts").child(request.form["downvote"]).update({"votes":likes-1})
+            user = login_session["user"]["localId"]
+            db.child('Posts').child(request.form["downvote"]).update({"dvoted":voted1+[user]})
+    except:
+        pass
+
 @app.route("/", methods = ["get", "post"])
 def home():
     if request.method == "POST":
@@ -53,34 +83,7 @@ def home():
         except:
             print("not sign out")
 
-        try:
-            print(db.child('Users').get().val())
-            voted0 = list(db.child('Posts').child(request.form["upvote"]).child("upvoted").get().val())
-            print("voted0", voted0)
-            if login_session["user"]["localId"] in voted0:
-                print("voted")
-            else:
-                likes = db.child("Posts").child(request.form["upvote"]).child("votes").get().val()
-                db.child("Posts").child(request.form["upvote"]).update({"votes":likes+1})
-                user = login_session["user"]["localId"]
-                db.child('Posts').child(request.form["upvote"]).update({"upvoted":voted0+[user]})
-        except:
-            print("downvote")
-
-
-        try:
-            voted1 = list(db.child('Posts').child(request.form["downvote"]).get().val())
-            print(db.child("Users").get().val())
-            if login_session["user"]["localId"] in voted1:
-                print("voted")
-            else:
-                likes = db.child("Posts").child(request.form["downvote"]).child("votes").get().val()
-                print(likes)
-                db.child("Posts").child(request.form["downvote"]).update({"votes":likes-1})
-                user = login_session["user"]["localId"]
-                db.child('Posts').child(request.form["downvote"]).update({"dvoted":voted1+[user]})
-        except:
-            pass
+        vote_func()
     # else:
     try:
         print(type(db.child("Posts").get().val()))
@@ -108,6 +111,11 @@ def submit():
 @app.route("/posts/<string:Id>", methods = ["get", "post"])
 def post(Id):
     if request.method == "GET":
+        posts = dict(db.child("Posts").get().val())
+        print(list(posts.keys()))
+        return render_template("post.html", posts=posts, keys=list(posts.keys()), Id = Id)
+    else:
+        vote_func()
         posts = dict(db.child("Posts").get().val())
         print(list(posts.keys()))
         return render_template("post.html", posts=posts, keys=list(posts.keys()), Id = Id)
