@@ -91,7 +91,7 @@ def home():
         # print("user" in list(dict(login_session).keys()))
         keys=list(posts.keys())
         keys.reverse()
-        return render_template("home.html", posts=posts, keys=keys, logged=("user" in list(dict(login_session).keys())))
+        return render_template("home.html", posts=posts, keys=keys, logged=("user" in list(dict(login_session).keys())), ln =0)
     except:
         return render_template("home.html", logged=("user" in list(dict(login_session).keys())))
 
@@ -101,7 +101,7 @@ def submit():
         try:
             user = dict(db.child("Users").child(login_session["user"]["localId"]).get().val())
             user["userId"] = login_session["user"]["localId"]
-            post = {"title": request.form["title"], "text":request.form["text"], "user": user, "votes": 1, "upvoted":[""], "dvoted":[""]}
+            post = {"title": request.form["title"], "text":request.form["text"], "user": user, "votes": 1, "upvoted":[""], "dvoted":[""], "comments":{login_session["user"]["localId"]:"feel welcome to post your respectful comments here :)"}}
             print(post)
             db.child("Posts").push(post)
         except:
@@ -113,12 +113,12 @@ def post(Id):
     if request.method == "GET":
         posts = dict(db.child("Posts").get().val())
         print(list(posts.keys()))
-        return render_template("post.html", posts=posts, keys=list(posts.keys()), Id = Id)
+        return render_template("post.html", posts=posts, keys=list(posts.keys()), Id = Id, ln = len(list(posts.keys())))
     else:
         vote_func()
         posts = dict(db.child("Posts").get().val())
         print(list(posts.keys()))
-        return render_template("post.html", posts=posts, keys=list(posts.keys()), Id = Id)
+        return render_template("post.html", posts=posts, keys=list(posts.keys()), Id = Id, ln =0)
     return render_template("post.html", logged=("user" in list(dict(login_session).keys())))
 
 

@@ -166,38 +166,53 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3"></div>
-            <div class="col-6" style="background-color: white;">
+            <div class="col-6">
                 <div class="row" style="background-color: white; margin-top: 20px;">
-                        <div class="col-1" style="background-color: none;">
-                            <form class="d-flex justify-content-center" action="/posts/{{Id}}" method="post">
-                                <button class="vote" type="submit" name="upvote" value="{{Id}}">&#8657</button>
-                            </form>
-                            <p class="d-flex justify-content-center" style="margin: 0px;">{{posts[Id]["votes"]}}</p>
-                            <form class="d-flex justify-content-center" action="/posts/{{Id}}" method="post">
-                                <button class="vote" type="submit" name="downvote" value="{{Id}}">&#8659</button>
-                            </form>
-                        </div>
-                        <div class="col-11">
-                            <a href="#">
-                            <img src="https://i.pinimg.com/736x/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.jpg" style="max-height: 20px;">
-                            <span>{{posts[Id]["user"]["username"]}}</span>
-                            </a>
-                            <h3>{{posts[Id]["title"]}}</h3>
-                            <a href="/log_in"><button type="button" class="tag">tag</button></a>
-                            <p>{{posts[Id]["text"]}}</p>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="/log_in"><button type="button" class="btn btn-light"><img src="https://icon-library.com/images/comment-icon-png/comment-icon-png-2.jpg" style="max-height: 15px;">
-                                [num] comments</button></a>
-                                <a href="/log_in"><button type="button" class="btn btn-light">&#8625 share</button></a>
-                                <a href="/log_in"><button type="button" class="btn btn-light"><img src="https://icon-library.com/images/bookmark-icon-png/bookmark-icon-png-1.jpg" style="max-height: 15px;">
-                                add bookmark</button></a>
-                                <a href="/log_in"><button type="button" class="btn btn-light">&#9872 report</button></a>
-                            </div>
+                    <div class="col-1" style="background-color: none;">
+                        <form class="d-flex justify-content-center" action="/posts/{{Id}}" method="post">
+                            <button class="vote" type="submit" name="upvote" value="{{Id}}">&#8657</button>
+                        </form>
+                        <p class="d-flex justify-content-center" style="margin: 0px;">{{posts[Id]["votes"]}}</p>
+                        <form class="d-flex justify-content-center" action="/posts/{{Id}}" method="post">
+                            <button class="vote" type="submit" name="downvote" value="{{Id}}">&#8659</button>
+                        </form>
+                    </div>
+                    <div class="col-11">
+                        <a href="#">
+                        <img src="https://i.pinimg.com/736x/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.jpg" style="max-height: 20px;">
+                        <span>{{posts[Id]["user"]["username"]}}</span>
+                        </a>
+                        <h3>{{posts[Id]["title"]}}</h3>
+                        <a href="/log_in"><button type="button" class="tag">tag</button></a>
+                        <p>{{posts[Id]["text"]}}</p>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="/log_in"><button type="button" class="btn btn-light" disabled><img src="https://icon-library.com/images/comment-icon-png/comment-icon-png-2.jpg" style="max-height: 15px;">
+                            {{ln}} comments</button></a>
+                            <a href="/log_in"><button type="button" class="btn btn-light">&#8625 share</button></a>
+                            <a href="/log_in"><button type="button" class="btn btn-light"><img src="https://icon-library.com/images/bookmark-icon-png/bookmark-icon-png-1.jpg" style="max-height: 15px;">
+                            add bookmark</button></a>
+                            <a href="/log_in"><button type="button" class="btn btn-light">&#9872 report</button></a>
                         </div>
                     </div>
-                <div class="row">
-                    
                 </div>
+                {% for commentor in posts[Id]["comments"] %}
+                <div class="row" style="background-color: white; margin-top: 20px;">
+                    <a href="#" style="margin-top: 10px;">
+                    <img src="https://i.pinimg.com/736x/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.jpg" style="max-height: 20px; margin-left: 20px;">
+                    <span>{{commentor}}</span>
+                    </a>
+                    <p style="break-before: right; margin-left: 20px;">{{posts[Id]["comments"][commentor]}}</p>
+                    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                        <form action="/posts/{{Id}}" method="post">
+                            <button class="btn btn-light" type="submit" name="upvote" value="{{Id}}">&#8657</button>
+                        </form>
+                        <p class = "btn btn-light" style="margin: 0px;">{{posts[Id]["votes"]}}</p>
+                        <form action="/posts/{{Id}}" method="post">
+                            <button class="btn btn-light" type="submit" name="downvote" value="{{Id}}">&#8659</button>
+                        </form>
+                    </div> -->
+                </div>
+                {% endfor %}
             </div>
             <div class="col-3"></div>
         </div>
